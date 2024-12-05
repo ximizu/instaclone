@@ -4,18 +4,23 @@
     <div><%= post.user.username %></div>
   </div>
   <div class="post-body">
-    <span><%= post.body %></span>
+    <span><%= post.body %><br/><%= post.id %></span>
   </div>
+
   <div class="post-actions">
+    <!-- Like button and counter -->
     <%= turbo_frame_tag "post-likes" do %>
-      <%= button_to "", post_likes_path(post), class: "post-actions-like" %>
+      <%= render partial: "likes/button", locals: { post: post }  %>
     <% end %>
+    <!-- Comments counter -->
     <div class="post-actions-comments">
         <div id="post-comments-count">
           <%= pluralize(post.comments.count, "comment") %>
         </div>
     </div>
   </div>
+
+
   <div class="post-comments">
     <div id="comment-form">
       <%= render partial: "comments/form", locals: { post: post }  %>
