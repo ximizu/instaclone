@@ -1,18 +1,17 @@
-<%= turbo_frame_tag "comment-likes" do %>
+<% if current_user %>
+  <turbo-frame id="comment-likes">
+<% end %>
   <div class="comment-likes-container">
-    <% if current_user %>
-      <% if comment.likes.where(user_id: current_user.id).count == 0 %>
-        <%= button_to "like", comment_like_path(comment), class: "comment-like-button" %>
-      <% else %>
-        <%= button_to "like", comment_unlike_path(comment), class: "comment-liked-button", method: :delete %>
-      <% end %>
+    <% if !current_user || !comment.liked_by_user(current_user) %>
+      <%= button_to "like", comment_like_path(comment), class: "comment-like-button" %>
+    <% else %>
+      <%= button_to "like", comment_unlike_path(comment), class: "comment-liked-button", method: :delete %>
     <% end %>
 
     <% if comment.likes.count > 0 %>
-      <% if !current_user %>
-        like
-      <% end %>
       <span><%= comment.likes.count %></span>
     <% end %>
   </div>
+<% if current_user %>
+  </turbo-frame>
 <% end %>

@@ -15,9 +15,13 @@ class CommentsController < ApplicationController
   end
 
   def like
-    @comment = Comment.find(params[:comment_id])
-    @comment.like!(current_user)
-    render partial: "comments/like", locals: { comment: @comment }
+    if current_user
+      @comment = Comment.find(params[:comment_id])
+      @comment.like!(current_user)
+      render partial: "comments/like", locals: { comment: @comment }
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def unlike

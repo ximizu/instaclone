@@ -10,4 +10,8 @@ class Comment < ApplicationRecord
   def unlike!(user)
     likes.where(user_id: user.id).delete_all
   end
+
+  def liked_by_user(user)
+    likes.where(user_id: user.id).count > 0
+  end
 end
