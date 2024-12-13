@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "post-likes" do %>
+  <div>
+    <% if current_user && post.likes.any? { |like| like.user_id == current_user.id } %>
+      <%= button_to "", post_unlike_path(post), class: "post-actions-unlike", method: :delete %>
+    <% else %>
+      <%= button_to "", post_like_path(post), class:"post-actions-like" %>
+    <% end %>
+
+    <% if post.likes.count > 0 %>
+      <span><%= pluralize(post.likes.count, "like") %></span>
+    <% end %>
+  </div>
+<% end %>

@@ -1,12 +1,21 @@
 Rails.application.routes.draw do
   resources :posts, only:  [ :create, :new ] do
-    resources :comments, only: [ :create, :new ]
-    resources :likes, only: :create do
-      collection do
-        delete :destroy
+    resources :comments, only: [ :create, :new ], shallow: true do
+      resources :likes, only: :create do
+        collection do
+          delete :destroy
+        end
       end
     end
-end
+    post "like"
+    delete "unlike"
+    # resources :likes, only: :create do
+    #   collection do
+    #     delete :destroy
+    #   end
+    # endL
+  end
+
   get "site/index"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

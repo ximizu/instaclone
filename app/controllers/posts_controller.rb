@@ -14,6 +14,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def like
+    @post = Post.find(params[:post_id])
+    @post.like!(current_user)
+    render partial: "posts/like", locals: { post: @post }
+  end
+
+  def unlike
+    @post = Post.find(params[:post_id])
+    @post.unlike!(current_user)
+    render partial: "posts/like", locals: { post: @post }
+  end
+
   private
 
     def post_params
