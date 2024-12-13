@@ -14,6 +14,18 @@ class CommentsController < ApplicationController
     end
   end
 
+  def like
+    @comment = Comment.find(params[:comment_id])
+    @comment.like!(current_user)
+    render partial: "comments/like", locals: { comment: @comment }
+  end
+
+  def unlike
+    @comment = Comment.find(params[:comment_id])
+    @comment.unlike!(current_user)
+    render partial: "comments/like", locals: { comment: @comment }
+  end
+
   private
    def comment_params
      params.require(:comment).permit(:body)

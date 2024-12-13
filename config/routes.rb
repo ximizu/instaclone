@@ -1,19 +1,11 @@
 Rails.application.routes.draw do
   resources :posts, only:  [ :create, :new ] do
     resources :comments, only: [ :create, :new ], shallow: true do
-      resources :likes, only: :create do
-        collection do
-          delete :destroy
-        end
-      end
+      post "like"
+      delete "unlike"
     end
     post "like"
     delete "unlike"
-    # resources :likes, only: :create do
-    #   collection do
-    #     delete :destroy
-    #   end
-    # endL
   end
 
   get "site/index"

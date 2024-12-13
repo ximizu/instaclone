@@ -9,9 +9,7 @@
 
   <div class="post-actions">
     <!-- Like button and counter -->
-    <%= turbo_frame_tag "post-likes" do %>
-      <%= render partial: "posts/like", locals: { post: post }  %>
-    <% end %>
+    <%= render partial: "posts/like", locals: { post: post }  %>
     <!-- Comments counter -->
     <div class="post-actions-comments">
         <div id="post-<%= post.id %>-comments-count">

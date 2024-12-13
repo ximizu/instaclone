@@ -144,3 +144,13 @@ button {
 .comment-form {
   margin-bottom: 5px;
 }
+
+.comment-likes-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.comment-liked-button {
+  background: pink;
+}
